@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<!-- Use the file version of the SqlDeveloper executable as the product version -->
+	<?define ProductVersion = !(bind.FileVersion.ReferenceExe) ?>
+	<?define ProductName = "SQL Developer" ?>
+	<?define ProductManufacturer = "Oracle" ?>
+	<!-- the executable file we're using to set version number, and the Installed Apps icon -->
+	<?define ReferenceExecutable = "sqldeveloper.exe" ?>
+	<?define ReferenceExecutableFolder = "sqldeveloper" ?>
+	<?define SqlDeveloperHarvestFolder = "$(var.SolutionDir)sqldeveloper"?>
+
+	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e">
+		<Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" Platform="x64" InstallPrivileges="elevated"
+				 Description="Oracle SQL Developer $(var.ProductVersion)"
+			     Comments="SQL Developer with JDK installation package (unofficial)"/>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="no" Schedule="afterInstallValidate" />
+		<MediaTemplate EmbedCab="yes" />
+
+		<!-- Set the install icon to whatever the SqlDeveloper executable is using -->
+		<Icon Id="sqldeveloper.exe" SourceFile="$(var.SolutionDir)\$(var.ReferenceExecutableFolder)\$(var.ReferenceExecutable)"/>
+		<Property Id="ARPPRODUCTICON" Value="sqldeveloper.exe" />
+		<!-- Don't allow Modify from Installed Apps -->
+		<Property Id="ARPNOMODIFY" Value="yes"  Secure="yes" />
+		<Property Id="DISABLEADVTSHORTCUTS" Value="1" />
+
+		<Feature Id="ProductFeature" Title="SQLDeveloper" Level="1" AllowAdvertise="no" InstallDefault="local" TypicalDefault="install" Absent="disallow">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="EnvironmentChanges" />
+			<ComponentGroupRef Id="SqlDeveloperComponents" />
+			<ComponentRef Id="ProgramMenuDir"/>
+			<Feature Id="PublicDesktopShortcut" Title="Add desktop shortut" Level="1" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
+				<ComponentRef Id="DesktopShortcut"/>
+			</Feature>
+		</Feature>
+
+		<!-- Use the UI that allows an install directory to be chosen-->
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+		<WixVariable Id="WixUILicenseRtf" Value="oraclelicense.rtf" />
+		<UIRef Id="WixUI_FeatureTree" />
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<!-- Public desktop directory -->
+			<Directory Id="DesktopFolder" Name="Desktop">
+			</Directory>
+			<!-- Start menu directories -->
+			<Directory Id="ProgramMenuFolder" >
+				<Directory Id="ProgramMenuDir" Name="$(var.ProductName)">
+				</Directory>
+			</Directory>
+			<Directory Id="ProgramFiles64Folder">
+				<Directory Id="MANUFACTURERFOLDER" Name="$(var.ProductManufacturer)">
+					<Directory Id="INSTALLFOLDER" Name="sqldeveloper" />
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="EnvironmentChanges" Directory="TARGETDIR">
+			<Component Id="SystemPathUpdate" Guid="{F224D9FB-8176-4FB4-8AD7-622223D18B74}">
+				<!-- add sqldeveloper to the system path -->
+				<Environment Id="SQLDEVELOPERPATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="yes" />
+				<!-- add sqldeveloper\bin to the system path (for sql.exe) -->
+				<Environment Id="SQLPATH" Name="PATH" Value="[INSTALLFOLDER]\sqldeveloper\bin" Permanent="no" Part="last" Action="set" System="yes" />
+			</Component>
+		</ComponentGroup>
+		<ComponentGroup Id="ProductComponents" Directory="MANUFACTURERFOLDER">
+			<!-- this will never be installed (Condition is never true) - it's just here so we can get the file version and icon -->
+			<Component Id="ReferenceExectable" Guid="{DFD20123-DE91-40AD-BDC2-1F2B77BCC3D7}" Win64="yes" >
+				<File Id="ReferenceExe" KeyPath="yes" Source="$(var.SolutionDir)\$(var.ReferenceExecutableFolder)\$(var.ReferenceExecutable)" />
+				<Condition>1 = 0</Condition>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+
+	<Fragment>
+		<DirectoryRef Id="DesktopFolder">
+			<!-- The public desktop shortcut can potentially leave an orphaned registry entry if a different user (from the installing user) uninstalls. This is because the registry key serving as the keypath for component needs to have a root of HKCU (Current user) rather than HKLM or HKMU - otherwise ICE will throw a ICE57 error. This is a well known issue for non-advertised shortcuts that are not being written to the program menu folder. Rather than suppressing the ICE57, I decided this is a flaw that we can live with since the entry left behind does no harm, and scripts to clean it up can be written by admins. A custom action to install the shortcut is one likely way to get around this problem.
+			-->
+			<Component Id="DesktopShortcut" Guid="{4A982BA2-B095-452A-BFFF-492E9D3B2D29}" >
+				<Shortcut Id="SqlDeveloperExeDesktopShortcut" Name="SQL Developer" Advertise="no" Icon="sqldeveloper.exe" WorkingDirectory="INSTALLFOLDER" Target="[INSTALLFOLDER]\$(var.ReferenceExecutable)"></Shortcut>
+				<RemoveFolder Id="RemoveDesktopShortcut" On="uninstall"/>
+				<RegistryKey Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
+					<RegistryKey Key="DesktopShortcut">
+						<RegistryValue Type="string" Value="This registry key is a by-product of the installation process - it can be safely deleted." KeyPath="yes" />
+					</RegistryKey>
+				</RegistryKey>
+			</Component>
+		</DirectoryRef>
+		<DirectoryRef Id="ProgramMenuDir">
+			<Component Id="ProgramMenuDir" Guid="{FEB80A59-37EF-4738-97AA-D00796914774}">
+				<RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+				<RegistryValue Root="HKMU" Key="Software\[ProductName]" Type="string" Value="" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+</Wix>
