@@ -5,7 +5,7 @@ Oracle does not provide a SQL Developer installation package for Windows. This V
 This installer is not an official Oracle release, and the Oracle corporation is not involved in its development. I (@stchan) am not affiliated with Oracle corporation in any way, have no involvement in the development of its products (including SQL Developer), and do not represent it in any manner. SQL Developer is the property of Oracle corporation. Check your licensing agreement with Oracle if you have concerns about using this installer.
 
 ## License
-Any content that is not the property of Oracle corporation (in this case SQL Developer and its associated material), and is the work of the author (@stchan) is MIT/X11 licensed.
+Any content that is not the property of Oracle corporation (SQL Developer and its associated material), and is the work of the author (@stchan) is MIT/X11 licensed.
 
 ## Tooling
 * Visual Studio 2022
@@ -14,7 +14,7 @@ Any content that is not the property of Oracle corporation (in this case SQL Dev
 
 ## Building
 1. Download the Windows 64-bit with JDK included archive from [here](https://www.oracle.com/database/sqldeveloper/technologies/download/).
-1. Extract the "sqldeveloper" folder in the archive under the solution folder (ie. at the same level as the "SQLDeveloperInstaller" project folder). You can overwrite an empty existing "sqldeveloper" folder - .gitignore has an entry for that folder. If there are files in the folder (ie. an upgrade situation), I recommend deleting it first as the build process (heat.exe) will gather everything. Any old/obsolete files would be included.
+1. Extract the "sqldeveloper" folder in the archive under the solution folder (ie. at the same level as the "SQLDeveloperInstaller" project folder). You can overwrite an empty existing "sqldeveloper" folder - .gitignore has an entry for that folder. If there are files in the folder (ie. an upgrade situation), I recommend deleting it first as the harvest process (heat.exe) will gather everything. Any old/obsolete files would be included.
 1. Set the solution configuration to "Release", and the platform to "x64".
 1. Build the solution - the MSI will be in "bin\Release"
 
