@@ -19,6 +19,6 @@ Any content that is not the property of Oracle corporation (SQL Developer and it
 1. Build the solution - the MSI will be in "bin\Release"
 
 ## Notes
-* I developed on Windows 11 22H2, but don't see any reason why this wouldn't work on any 64-bit version of Windows that can run the tools.
-* The installer derives its version from the fileversion of "sqldeveloper.exe", so as long as Oracle continues to increment it, new MSIs will automatically be able to upgrade old installs.
-* The MSI output name is manually set, so if you upgrade to newer versions of SQL Developer, it should be changed. It will still work properly (ie will upgrade older versions), but will be incorrectly named.
+* Developed on Windows 11 22H2, but should work on any 64-bit version of Windows that can run VS 2022.
+* The installer derives its version from the fileversion of "sqldeveloper.exe", so as long as Oracle increments with it every release, new MSIs will automatically be able to upgrade old installs.
+* The MSI output name is manually set, so if you upgrade to newer versions of SQL Developer, it should be changed.
