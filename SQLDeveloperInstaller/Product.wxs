@@ -64,7 +64,7 @@
 				<!-- add sqldeveloper to the system path -->
 				<Environment Id="SQLDEVELOPERPATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="yes" />
 				<!-- add sqldeveloper\bin to the system path (for sql.exe) -->
-				<Environment Id="SQLPATH" Name="PATH" Value="[INSTALLFOLDER]\sqldeveloper\bin" Permanent="no" Part="last" Action="set" System="yes" />
+				<Environment Id="SQLPATH" Name="PATH" Value="[INSTALLFOLDER]sqldeveloper\bin" Permanent="no" Part="last" Action="set" System="yes" />
 			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="ProductComponents" Directory="MANUFACTURERFOLDER">

@@ -59,5 +59,8 @@
     <HeatDirectory NoLogo="$(HarvestDirectoryNoLogo)" SuppressAllWarnings="$(HarvestDirectorySuppressAllWarnings)" SuppressSpecificWarnings="$(HarvestDirectorySuppressSpecificWarnings)" ToolPath="$(WixToolPath)" TreatWarningsAsErrors="$(HarvestDirectoryTreatWarningsAsErrors)" TreatSpecificWarningsAsErrors="$(HarvestDirectoryTreatSpecificWarningsAsErrors)" VerboseOutput="$(HarvestDirectoryVerboseOutput)" AutogenerateGuids="$(HarvestDirectoryAutogenerateGuids)" GenerateGuidsNow="$(HarvestDirectoryGenerateGuidsNow)" OutputFile="SqlDeveloperComponents.wxs" SuppressFragments="$(HarvestDirectorySuppressFragments)" SuppressUniqueIds="$(HarvestDirectorySuppressUniqueIds)" Transforms="SqlDeveloper.xslt" Directory="$(SolutionDir)sqldeveloper" ComponentGroupName="SqlDeveloperComponents" DirectoryRefId="INSTALLFOLDER" KeepEmptyDirectories="true" PreprocessorVariable="var.SqlDeveloperHarvestFolder" SuppressCom="true" SuppressRootDirectory="true" SuppressRegistry="true" RunAsSeparateProcess="$(RunWixToolsOutOfProc)">
     </HeatDirectory>
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>certutil -hashfile !(TargetPath) sha512 &gt;  !(TargetPath).sha512</PostBuildEvent>
+  </PropertyGroup>
   <!-- Transforms="%(HarvestDirectory.Transforms)" -->
 </Project>
