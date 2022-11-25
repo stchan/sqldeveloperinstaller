@@ -14,7 +14,7 @@
 				 Description="Oracle SQL Developer $(var.ProductVersion)"
 			     Comments="SQL Developer with JDK installation package (unofficial)"/>
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="no" Schedule="afterInstallValidate" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes" Schedule="afterInstallValidate" />
 		<MediaTemplate EmbedCab="yes" />
 
 		<!-- Set the install icon to whatever the SqlDeveloper executable is using -->
@@ -28,6 +28,7 @@
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentGroupRef Id="EnvironmentChanges" />
 			<ComponentGroupRef Id="SqlDeveloperComponents" />
+			<ComponentGroupRef Id="RegistryChanges" />
 			<ComponentRef Id="ProgramMenuDir"/>
 			<Feature Id="PublicDesktopShortcut" Title="Add desktop shortut" Level="1" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
 				<ComponentRef Id="DesktopShortcut"/>
@@ -74,26 +75,33 @@
 				<Condition>1 = 0</Condition>
 			</Component>
 		</ComponentGroup>
+		<ComponentGroup Id="RegistryChanges" Directory="TARGETDIR">
+			<Component Id="RootProductRegistrtyKey" Guid="{30D5672A-F8B1-4116-8652-F82606C3AEE8}">
+				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes" >
+					<RegistryValue Name="InstallDir" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+					<RegistryValue Name="Version" Type="string" Value="$(var.ProductVersion)" />
+				</RegistryKey>
+			</Component>
+		</ComponentGroup>
 	</Fragment>
 
 	<Fragment>
 		<DirectoryRef Id="DesktopFolder">
-			<!-- The public desktop shortcut can potentially leave an orphaned registry entry if a different user (from the installing user) uninstalls. This is because the registry key serving as the keypath for component needs to have a root of HKCU (Current user) rather than HKLM or HKMU - otherwise ICE will throw a ICE57 error. This is a well known issue for non-advertised shortcuts that are not being written to the program menu folder. Rather than suppressing the ICE57, I decided this is a flaw that we can live with since the entry left behind does no harm, and scripts to clean it up can be written by admins. A custom action to install the shortcut is one likely way to get around this problem.
+			<!-- 
+			The ICE57 warning is being suppressed for these registry entries - light doesn't know that the installer only does per-machine installs. 
 			-->
 			<Component Id="DesktopShortcut" Guid="{4A982BA2-B095-452A-BFFF-492E9D3B2D29}" >
 				<Shortcut Id="SqlDeveloperExeDesktopShortcut" Name="SQL Developer" Advertise="no" Icon="sqldeveloper.exe" WorkingDirectory="INSTALLFOLDER" Target="[INSTALLFOLDER]\$(var.ReferenceExecutable)"></Shortcut>
 				<RemoveFolder Id="RemoveDesktopShortcut" On="uninstall"/>
-				<RegistryKey Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
-					<RegistryKey Key="DesktopShortcut">
-						<RegistryValue Type="string" Value="This registry key is a by-product of the installation process - it can be safely deleted." KeyPath="yes" />
-					</RegistryKey>
+				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]">
+					<RegistryValue Name="PublicDesktopShortcut" Type="string" Value="[DesktopFolder]SQL Developer.lnk" KeyPath="yes" />
 				</RegistryKey>
 			</Component>
 		</DirectoryRef>
 		<DirectoryRef Id="ProgramMenuDir">
 			<Component Id="ProgramMenuDir" Guid="{FEB80A59-37EF-4738-97AA-D00796914774}">
 				<RemoveFolder Id="ProgramMenuDir" On="uninstall" />
-				<RegistryValue Root="HKMU" Key="Software\[ProductName]" Type="string" Value="" KeyPath="yes" />
+				<RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Name="ProgramMenuDir" Type="string" Value="[ProgramMenuDir]" KeyPath="yes" />
 			</Component>
 		</DirectoryRef>
 	</Fragment>
