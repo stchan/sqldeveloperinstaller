@@ -21,7 +21,7 @@ Any content that is not the property of Oracle (SQL Developer and its associated
 ## Notes
 * Developed on Windows 11 22H2, but should build on any 64-bit version of Windows that can run VS 2022.
 * The installer derives its version from "sqldeveloper.exe", so as long as Oracle increments the file version every release, new MSIs will automatically be able to upgrade old installs.
-* The MSI output name is manually set - you'll have to change it with every upgrade.
+* ~~The MSI output name is manually set - you'll have to change it with every upgrade.~~
 * [Jeff Smith](https://www.thatjeffsmith.com/about/), a product manager at Oracle on the SQL Developer team [does not recommend installing SQL Developer into the %ProgramFiles% folder](https://www.thatjeffsmith.com/archive/2022/06/oracle-sql-developer-modeler-versions-22-2-now-available/), though I'm not sure if he means never ever, or just don't xcopy it in.
 * There are no plans to support 32-bit installations (zilch, zero, so don't ask), but modifying the project to target x86 shouldn't be difficult.
 
