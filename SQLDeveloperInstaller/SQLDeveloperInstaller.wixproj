@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>214dc16e-4524-4f5c-980b-01a1ff9e3826</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>sqldeveloper-22.2.1.234.1810-x64</OutputName>
+    <OutputName>sqldeveloperinstaller</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup>
@@ -16,10 +16,6 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants>SqlDeveloperHarvestFolder=..\sqldeveloper</DefineConstants>
@@ -59,6 +55,13 @@
     <!-- Heat Harvest -->
     <HeatDirectory NoLogo="$(HarvestDirectoryNoLogo)" SuppressAllWarnings="$(HarvestDirectorySuppressAllWarnings)" SuppressSpecificWarnings="$(HarvestDirectorySuppressSpecificWarnings)" ToolPath="$(WixToolPath)" TreatWarningsAsErrors="$(HarvestDirectoryTreatWarningsAsErrors)" TreatSpecificWarningsAsErrors="$(HarvestDirectoryTreatSpecificWarningsAsErrors)" VerboseOutput="$(HarvestDirectoryVerboseOutput)" AutogenerateGuids="$(HarvestDirectoryAutogenerateGuids)" GenerateGuidsNow="$(HarvestDirectoryGenerateGuidsNow)" OutputFile="SqlDeveloperComponents.wxs" SuppressFragments="$(HarvestDirectorySuppressFragments)" SuppressUniqueIds="$(HarvestDirectorySuppressUniqueIds)" Transforms="SqlDeveloper.xslt" Directory="$(SolutionDir)sqldeveloper" ComponentGroupName="SqlDeveloperComponents" DirectoryRefId="INSTALLFOLDER" KeepEmptyDirectories="true" PreprocessorVariable="var.SqlDeveloperHarvestFolder" SuppressCom="true" SuppressRootDirectory="true" SuppressRegistry="true" RunAsSeparateProcess="$(RunWixToolsOutOfProc)">
     </HeatDirectory>
+    <!-- Use Version/platform in MSI filename -->
+    <Exec Command="powershell -command &quot;(get-item ..\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion&quot;" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="SqlDevVersion" />
+    </Exec>
+    <CreateProperty Value="sqldeveloper-$(SqlDevVersion)-$(Platform)">
+      <Output TaskParameter="Value" PropertyName="TargetName" />
+    </CreateProperty>  
   </Target>
   <PropertyGroup>
     <PostBuildEvent>certutil -hashfile !(TargetPath) sha512 &gt;  !(TargetPath).sha512</PostBuildEvent>
