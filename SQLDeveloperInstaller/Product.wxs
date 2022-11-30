@@ -7,7 +7,6 @@
 	<!-- the executable file we're using to set version number, and the Installed Apps icon -->
 	<?define ReferenceExecutable = "sqldeveloper.exe" ?>
 	<?define ReferenceExecutableFolder = "sqldeveloper" ?>
-	<?define SqlDeveloperHarvestFolder = "$(var.SolutionDir)sqldeveloper"?>
 
 	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e">
 		<Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" Platform="x64" InstallPrivileges="elevated"

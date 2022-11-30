@@ -22,7 +22,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    <SuppressIces>ICE57</SuppressIces>
+    <!-- 
+      ICE61 suppressed because same version upgrades will be allowed. The version number is tied to sqldeveloper.exe, and allowing same version upgrades allows an MSI with fixes to upgrade an older one with the same version. 
+      ICE57 - See comments in Product.wxs file for notes.
+    -->
+    <SuppressIces>ICE57;ICE61</SuppressIces>
+    <DefineConstants>SqlDeveloperHarvestFolder=..\sqldeveloper</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
@@ -56,15 +61,14 @@
     <HeatDirectory NoLogo="$(HarvestDirectoryNoLogo)" SuppressAllWarnings="$(HarvestDirectorySuppressAllWarnings)" SuppressSpecificWarnings="$(HarvestDirectorySuppressSpecificWarnings)" ToolPath="$(WixToolPath)" TreatWarningsAsErrors="$(HarvestDirectoryTreatWarningsAsErrors)" TreatSpecificWarningsAsErrors="$(HarvestDirectoryTreatSpecificWarningsAsErrors)" VerboseOutput="$(HarvestDirectoryVerboseOutput)" AutogenerateGuids="$(HarvestDirectoryAutogenerateGuids)" GenerateGuidsNow="$(HarvestDirectoryGenerateGuidsNow)" OutputFile="SqlDeveloperComponents.wxs" SuppressFragments="$(HarvestDirectorySuppressFragments)" SuppressUniqueIds="$(HarvestDirectorySuppressUniqueIds)" Transforms="SqlDeveloper.xslt" Directory="$(SolutionDir)sqldeveloper" ComponentGroupName="SqlDeveloperComponents" DirectoryRefId="INSTALLFOLDER" KeepEmptyDirectories="true" PreprocessorVariable="var.SqlDeveloperHarvestFolder" SuppressCom="true" SuppressRootDirectory="true" SuppressRegistry="true" RunAsSeparateProcess="$(RunWixToolsOutOfProc)">
     </HeatDirectory>
     <!-- Use Version/platform in MSI filename -->
-    <Exec Command="powershell -command &quot;(get-item ..\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion&quot;" ConsoleToMSBuild="true">
+    <Exec Command="powershell -noninteractive -command &quot;(get-item ..\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion&quot;" ConsoleToMSBuild="true">
       <Output TaskParameter="ConsoleOutput" PropertyName="SqlDevVersion" />
     </Exec>
     <CreateProperty Value="sqldeveloper-$(SqlDevVersion)-$(Platform)">
       <Output TaskParameter="Value" PropertyName="TargetName" />
-    </CreateProperty>  
+    </CreateProperty>
   </Target>
   <PropertyGroup>
     <PostBuildEvent>certutil -hashfile !(TargetPath) sha512 &gt;  !(TargetPath).sha512</PostBuildEvent>
   </PropertyGroup>
-  <!-- Transforms="%(HarvestDirectory.Transforms)" -->
 </Project>
