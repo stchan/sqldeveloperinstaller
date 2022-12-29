@@ -69,6 +69,6 @@
     </CreateProperty>
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>certutil -hashfile !(TargetPath) sha512 &gt;  !(TargetPath).sha512</PostBuildEvent>
+    <PostBuildEvent>powershell -command "(Get-FileHash -Algorithm SHA512 %27!(TargetPath)%27).Hash + %27  %27 + (Split-Path %27!(TargetPath)%27 -leaf) | Out-File -filePath %27!(TargetPath).sha512%27 -encoding Default"</PostBuildEvent>
   </PropertyGroup>
 </Project>
