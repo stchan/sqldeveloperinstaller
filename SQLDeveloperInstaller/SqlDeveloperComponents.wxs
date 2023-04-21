@@ -485,6 +485,9 @@
                     <Component Id="cmp335B4803ACDFD9E1207791EE3E3C3050" Guid="*">
                         <File Id="filD7FA74BFCEA4DA20727EA7BB4B54E7E9" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\dataminer\scripts\upgradeRepo12_2_0_0_5To12_2_0_0_6.sql" />
                     </Component>
+                    <Component Id="cmp0F020415182FB7DE16FE0D117595A717" Guid="*">
+                        <File Id="fil1D76C23E64996CD3AD014BC6E5A73D7F" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\dataminer\scripts\upgradeRepo12_2_0_0_6To12_2_0_0_7.sql" />
+                    </Component>
                     <Component Id="cmp9BB4E2FA61355766E98FBE80093AA9D0" Guid="*">
                         <File Id="fil63A4000D9F65C2B8611F7F94E43E4E4B" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\dataminer\scripts\upgradeRepoFromORToBinary.sql" />
                     </Component>
@@ -579,9 +582,6 @@
                 <Component Id="cmp0E4D96528EFC7D2A01BDA9DF305441F2" Guid="*">
                     <File Id="filE4775ACD440068783A4E7FF4CDC2CF51" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.apache.commons-compress.jar" />
                 </Component>
-                <Component Id="cmp5613F4D6CA63DABA92DC947EFC08A897" Guid="*">
-                    <File Id="filDB24AB149DA9C72C643F87070997B2E2" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.apache.commons-logging.jar" />
-                </Component>
                 <Component Id="cmpC28E3BE978EA4D7DFAE77E5517176777" Guid="*">
                     <File Id="fil0ADF562F768C01B651112606067F6E8A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.apache.commons-math3.jar" />
                 </Component>
@@ -620,6 +620,9 @@
                 </Component>
                 <Component Id="cmp619A09677A558C001D200B8C0D64DEA7" Guid="*">
                     <File Id="fil9295EB30F21DAC87EB7874FD97442BA5" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.commons-httpclient.jar" />
+                </Component>
+                <Component Id="cmp994E9E2EB84BC145B6F61365BFCAB80F" Guid="*">
+                    <File Id="filFDBA477E97415CA5956FF0EC0B11AB71" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.commons-io.jar" />
                 </Component>
                 <Component Id="cmpF4661FFA8299D474B546FC95D909562E" Guid="*">
                     <File Id="fil7DDC953449FD3047611B7658830DD8E6" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.curvesapi.jar" />
@@ -729,8 +732,8 @@
                 <Component Id="cmp6649DC415E29D5783ADD40DAAF4CF547" Guid="*">
                     <File Id="fil837DD8FD560E51FC5A8BB10A7C323D2E" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.servlet-runtime.jar" />
                 </Component>
-                <Component Id="cmp79FFF61DAD29DF01A233811F1FDCFFC6" Guid="*">
-                    <File Id="fil37E0D61A6DDCACD47A0677A094FC4AF7" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.slf4j-api.jar" />
+                <Component Id="cmpC25F2335247907D457A70705A2711C03" Guid="*">
+                    <File Id="filD9A718ACEB34DD826AE89987A838828C" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.slf4j.jar" />
                 </Component>
                 <Component Id="cmp563BAD6350A491364BA89111CD89C443" Guid="*">
                     <File Id="fil54F8718A5A2FFB0CB60A010467E55800" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\external\oracle.external.spatial.jar" />
@@ -1121,8 +1124,8 @@
             </Directory>
             <Directory Id="dirA66AEC72C68B5E0DC255636BFC124B32" Name="jdbc">
                 <Directory Id="dir0E4E5AFF7A14C6DB5F3A835852624738" Name="lib">
-                    <Component Id="cmpE3F4D800FB0DE8C5993F87542265241A" Guid="*">
-                        <File Id="fil35DD72B61508676A51E71735FB6FA3AA" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\jdbc\lib\ojdbc8.jar" />
+                    <Component Id="cmpED3EC7A9C55F9B1073BBA8A08F8CC0CC" Guid="*">
+                        <File Id="filCCE86F0571EC89010D13321A76564F9C" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\jdbc\lib\ojdbc11.jar" />
                     </Component>
                 </Directory>
             </Directory>
@@ -1648,6 +1651,9 @@
                         </Component>
                         <Component Id="cmp9E49E3A3F7E7C6D302CF601A2456D33E" Guid="*">
                             <File Id="fil5AF0335185B1377CA331C643BC7B776B" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\jdk\jre\bin\vcruntime140.dll" />
+                        </Component>
+                        <Component Id="cmp1A9B3B1F07BDF6AFEDC1A44A2D697706" Guid="*">
+                            <File Id="filBF3A171302EB2A5DF8E01568388022FC" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\jdk\jre\bin\vcruntime140_1.dll" />
                         </Component>
                         <Component Id="cmpF2B3C0ABCE453CA80C8F2F34AB54B807" Guid="*">
                             <File Id="filCAC6549347ECB1B9A222A1428A35D4E2" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\jdk\jre\bin\verify.dll" />
@@ -2724,6 +2730,12 @@
                             <Component Id="cmpCCBF9837B0D2AFA6AC6E8B9363524754" Guid="*">
                                 <File Id="fil4450BB52E08B31C384913F8A36A12181" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\javafx\windows-x64\bin\msvcp140.dll" />
                             </Component>
+                            <Component Id="cmpC391546EDFFB35D95C2A80DF7E9A1984" Guid="*">
+                                <File Id="fil910A8205933A7341FAA497E53A660098" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\javafx\windows-x64\bin\msvcp140_1.dll" />
+                            </Component>
+                            <Component Id="cmp4EBC30B58F747A614DB324697777DD5F" Guid="*">
+                                <File Id="fil1C08064C1489F9A377A7C4FCBC51CE95" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\javafx\windows-x64\bin\msvcp140_2.dll" />
+                            </Component>
                             <Component Id="cmp23341545B71F086D998C69483AD6C7E4" Guid="*">
                                 <File Id="filBB261A3356F5B0FCEF6A6CE0C3E701EC" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\javafx\windows-x64\bin\prism_common.dll" />
                             </Component>
@@ -3029,8 +3041,8 @@
                     <Component Id="cmp2D0DB27443B26DA089879E0CF9B21C3D" Guid="*">
                         <File Id="fil3C213D10F0B047ABA82CC8925197A6EC" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\thirdparty\asm-9.0.jar" />
                     </Component>
-                    <Component Id="cmpCA62A3C1BD146C703A63868AAF273C2C" Guid="*">
-                        <File Id="fil22B70FEE38A60C050DC5C1FC8F9AA589" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\thirdparty\batik-all-1.14.0.0.1.jar" />
+                    <Component Id="cmp443AE8DDFFA51A4B8228254AF966FBF5" Guid="*">
+                        <File Id="fil48B70F369DF7927BB056C2364326923D" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\thirdparty\batik-all-1.16.0.0.1.jar" />
                     </Component>
                     <Component Id="cmpA56E65D043ABAE0288DD0B5928D53F69" Guid="*">
                         <File Id="fil10644368CF68998FF7BE6B7172E1FE53" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\modules\thirdparty\commons-codec-1.15.jar" />
@@ -4961,11 +4973,6 @@
                     </Directory>
                 </Directory>
             </Directory>
-            <Directory Id="dirE628065997331304C254A5CB214927AF" Name="orakafka">
-                <Component Id="cmp9A2B44BC2C10053D9FA5D00C7A868AA9" Guid="*">
-                    <File Id="filCB9F10081C5286B822723CD04B3C47C2" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\orakafka\orakafka.zip" />
-                </Component>
-            </Directory>
             <Directory Id="dir5D3C1441AB2C7484D3883604A78852A2" Name="rdbms">
                 <Directory Id="dir6A648D0C3A75A3F6D78EE66FA5F945C4" Name="jlib">
                     <Component Id="cmpF8E00E122C0BA713BDAE6EDE96C6795F" Guid="*">
@@ -4989,9 +4996,6 @@
                 <Directory Id="dir44E012FA61ABD2A93FCD1BBEE7CCCDA5" Name="bin">
                     <Component Id="cmpC4AFAB6C7FAB3AD399654CA7AFD0DAC8" Guid="*">
                         <File Id="fil9B7455788C9C1623437198B0B46797A5" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\bin\common.boot" />
-                    </Component>
-                    <Component Id="cmpA2B1AEA41FB0A90175E61D87FFF54D2E" Guid="*">
-                        <File Id="filDB90E4DABB80C37CC7FB25F7AD666A0A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\bin\history.log" />
                     </Component>
                     <Component Id="cmpEA0904A7D47CE8CB866DC561ABAF8D3E" Guid="*">
                         <File Id="fil3544F1EB603EA82F49075460CC7EC1C9" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\bin\java11.conf" />
@@ -7932,9 +7936,6 @@
                             <Component Id="cmpE1C63530FDB420970F8742371121D19D" Guid="*">
                                 <File Id="fil1AC29B8DE23B044A940BB216A02F654F" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\extensions\oracle.sqldeveloper.pgql\lib\slf4j-api.jar" />
                             </Component>
-                            <Component Id="cmp4FB77C2903ADAE91B2FDD2C697BBE725" Guid="*">
-                                <File Id="fil5F26419249EB03D649009B0113B682B6" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\extensions\oracle.sqldeveloper.pgql\lib\snakeyaml.jar" />
-                            </Component>
                             <Component Id="cmp1968A73260BFF4F1DE28B46187D4DFDC" Guid="*">
                                 <File Id="fil093C3E74F308A86550B813BFB0D34642" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\extensions\oracle.sqldeveloper.pgql\lib\truffle-api.jar" />
                             </Component>
@@ -7971,6 +7972,9 @@
                     <Component Id="cmp036F9C2C32E7ECD189F195D23308929B" Guid="*">
                         <File Id="fil30F7BC9FC722FF901C4884F8F81A783A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\ActiveQueryBuilder.jar" />
                     </Component>
+                    <Component Id="cmp5861767259AFB413B7DB3ED5E4F9D3AF" Guid="*">
+                        <File Id="filEA3FED04E9F76447B24E3BA59F4B9319" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\annotations.jar" />
+                    </Component>
                     <Component Id="cmpA884CCD5ACB91DDED78B49D4325979C2" Guid="*">
                         <File Id="filBD92018C6BBDA3EA89F069639B572C8A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\antlr-all-2.7.6.jar" />
                     </Component>
@@ -7980,14 +7984,14 @@
                     <Component Id="cmp717C5B827FFDBA58AB5F1B26C2E22A6E" Guid="*">
                         <File Id="filB4C2A0B43FA2AE9A95BEC09FC96D2215" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\antlr-runtime.jar" />
                     </Component>
+                    <Component Id="cmp37B60FF7D87D001DFD8D9A446FF8C35A" Guid="*">
+                        <File Id="fil2A9A8AC3DE59078444685933CB3F0867" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\antlr4-runtime.jar" />
+                    </Component>
                     <Component Id="cmp6DBD42694DC4DE6EE783EE3740A43F59" Guid="*">
                         <File Id="filA7129BED91389FB1CA5DEECB49983E13" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\asm.jar" />
                     </Component>
                     <Component Id="cmpBD9A92931DAE997D9EE799D28F3DC8CB" Guid="*">
                         <File Id="filF3F852DE41DA06E0B9DAFAF55ADE6062" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\aurora.jar" />
-                    </Component>
-                    <Component Id="cmpF07071379FA15F6117D7F6EE4D14EB4A" Guid="*">
-                        <File Id="filEC3CC424C4BCD4E643E5F37618F44EF2" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\auto-service-annotations.jar" />
                     </Component>
                     <Component Id="cmpE1425CF7681B2EA38D6FF15B1432D65C" Guid="*">
                         <File Id="fil35629368F89A26C7183A9A253FD37A60" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\common.jar" />
@@ -8001,8 +8005,8 @@
                     <Component Id="cmp336FE6273F43AC4F73BDE62DE2B33556" Guid="*">
                         <File Id="fil67E3E30A9BE030163CC5150EE94A8FE3" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\commons-compress.jar" />
                     </Component>
-                    <Component Id="cmpF2342890849817BC6253B4FB71656DDB" Guid="*">
-                        <File Id="filF57A49B1CDDAF80A190CF3AC0EB7E177" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\commons-logging.jar" />
+                    <Component Id="cmpE4C065140D89F05A5513F61BA88DE22A" Guid="*">
+                        <File Id="fil323CF7070FBD9AE324D342242B1184E0" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\commons-io.jar" />
                     </Component>
                     <Component Id="cmp99DD5D8F1DA84F2CE412052951F14408" Guid="*">
                         <File Id="fil9EC6F3453950BE1446C022A4F98F7C83" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\commons-math3.jar" />
@@ -8055,8 +8059,14 @@
                     <Component Id="cmpE24BE85C99DF41B45B3F8F6764E01125" Guid="*">
                         <File Id="filFEE6C31C0AA383E092651582776A4A1B" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\jackson-jr-stree.jar" />
                     </Component>
+                    <Component Id="cmp7D9222464CA6159928D271EB4C316596" Guid="*">
+                        <File Id="filC923604EB41A51201D6D25FED031810A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\jakarta.json-api.jar" />
+                    </Component>
                     <Component Id="cmp131A76E5B93E1E90D4B99612981BED44" Guid="*">
                         <File Id="filE3B1A9204292469E80166272B8795B11" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\jansi.jar" />
+                    </Component>
+                    <Component Id="cmpE53253B06C2454AEC9EBE6B09D33541E" Guid="*">
+                        <File Id="fil93122D44533E794CD93E74859E817581" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\jcl-over-slf4j.jar" />
                     </Component>
                     <Component Id="cmpE7FAAFC8DE37DB70DF8A597B9C4CFDC7" Guid="*">
                         <File Id="fil7B50DB609543C228F7B12E3A31D9C37E" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\jdbcrest.jar" />
@@ -8081,6 +8091,9 @@
                     </Component>
                     <Component Id="cmp62F5AA995D7DB6949DE84335F01A5D2B" Guid="*">
                         <File Id="fil1EE3AB20313CE1A11C9AA6BAE65E3C9A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\log4j-core.jar" />
+                    </Component>
+                    <Component Id="cmp3B0B3086A7494E610E6C498CA0F96B27" Guid="*">
+                        <File Id="filD785E27F0A04AAC5460035487D0480C2" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\log4j-over-slf4j.jar" />
                     </Component>
                     <Component Id="cmp2370C1C47A1E96F371359FA5DCB43F5D" Guid="*">
                         <File Id="fil88164534E7C429F4FD77EBECC0AE9FAE" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\low-level-api.jar" />
@@ -8121,11 +8134,14 @@
                     <Component Id="cmpB72EFA5F358FCE3CC40172894C8C8909" Guid="*">
                         <File Id="fil98642BE0E1E53145367048477EC6BA1C" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\osdt_core.jar" />
                     </Component>
+                    <Component Id="cmp9FB25503B0DF28CE21589F239433E745" Guid="*">
+                        <File Id="filD34D2AC51491DE76090843B6BE4BB7D4" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\parsson.jar" />
+                    </Component>
                     <Component Id="cmpA29EAB197E3717DBFDEDD67A06EE2746" Guid="*">
                         <File Id="filE6A89AA8DF77201BF5098B5905ED1473" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\plugin-api.jar" />
                     </Component>
-                    <Component Id="cmpCB6C6A112A8F30FBF763BBFA67C81582" Guid="*">
-                        <File Id="fil0A5EBC76FB411F15D12CD3AF6419DD53" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\poi-ooxml-schemas.jar" />
+                    <Component Id="cmpAFE0C4F1CF2150762687E06EA6C81378" Guid="*">
+                        <File Id="filAAD8F2ED8DA028AA143EEF806E4D5A7F" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\poi-ooxml-lite.jar" />
                     </Component>
                     <Component Id="cmpBA6F1E195705786A5446DF23854AA446" Guid="*">
                         <File Id="fil6E6FCB551DA1F7983E38A3153CE05609" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\poi-ooxml.jar" />
@@ -8181,9 +8197,6 @@
                     <Component Id="cmp3B654A108EA7EEB15BB4BE4EB155EE33" Guid="*">
                         <File Id="filA28C415F49E88FF0A1A118A6C44B703D" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\stringtemplate-3.1b1.jar" />
                     </Component>
-                    <Component Id="cmp4CA944D339415B2F15964668E85BBCBA" Guid="*">
-                        <File Id="filA735985A4BADBB87EF3C59E8EEE66120" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\ucp11.jar" />
-                    </Component>
                     <Component Id="cmp3786F0CEDF4448BC15D676A99073523E" Guid="*">
                         <File Id="filD6A6DE7E10544F1376AA999E9306B7CA" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\xdb.jar" />
                     </Component>
@@ -8196,6 +8209,9 @@
                     <Directory Id="dir0B341FF3FA8E682A53A632722734D2A7" Name="ext">
                         <Component Id="cmpC9A0304FA9C48F0DCC604E11BF2B36F8" Guid="*">
                             <File Id="filF6A212B2F08129302F36865878B9A42A" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\ext\cpat.jar" />
+                        </Component>
+                        <Component Id="cmp1F049A9E8BE0257EFF08C0638B8B8AD8" Guid="*">
+                            <File Id="fil0ADA644380BAC626B03681E3CBDE858E" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\ext\dbtools-apex.jar" />
                         </Component>
                         <Component Id="cmpF34728075FC71D22483BFA5DA62BA2D5" Guid="*">
                             <File Id="fil9908965283CD1B2DD7DBB2B136E8F87F" KeyPath="yes" Source="$(var.SqlDeveloperHarvestFolder)\sqldeveloper\lib\ext\dbtools-aq.jar" />
@@ -8436,6 +8452,7 @@
             <ComponentRef Id="cmp4291EEF12C9D9F7B31989DDF8D43D120" />
             <ComponentRef Id="cmpEDE7331AAEBF072CA0308BA814E9D71F" />
             <ComponentRef Id="cmp335B4803ACDFD9E1207791EE3E3C3050" />
+            <ComponentRef Id="cmp0F020415182FB7DE16FE0D117595A717" />
             <ComponentRef Id="cmp9BB4E2FA61355766E98FBE80093AA9D0" />
             <ComponentRef Id="cmpC0122A3B6876C4AAA1A6D1D1DC373E53" />
             <ComponentRef Id="cmpDE8DEBBF63153413FA8D8DED63564871" />
@@ -8465,7 +8482,6 @@
             <ComponentRef Id="cmp311BB035810C818FEB409BF2396505EA" />
             <ComponentRef Id="cmp0AC805F303BE11DD8104A0452796959C" />
             <ComponentRef Id="cmp0E4D96528EFC7D2A01BDA9DF305441F2" />
-            <ComponentRef Id="cmp5613F4D6CA63DABA92DC947EFC08A897" />
             <ComponentRef Id="cmpC28E3BE978EA4D7DFAE77E5517176777" />
             <ComponentRef Id="cmp6728D51F3D4E4F163CBA459535F6C4FB" />
             <ComponentRef Id="cmpF690A21E677DB34522660E22986319F5" />
@@ -8479,6 +8495,7 @@
             <ComponentRef Id="cmp8769C308CF87AF96018241A5562C3DFF" />
             <ComponentRef Id="cmpD4473E3786B59ACB0DEAC7422F1FD857" />
             <ComponentRef Id="cmp619A09677A558C001D200B8C0D64DEA7" />
+            <ComponentRef Id="cmp994E9E2EB84BC145B6F61365BFCAB80F" />
             <ComponentRef Id="cmpF4661FFA8299D474B546FC95D909562E" />
             <ComponentRef Id="cmp5E0A42926CC5C55FC82B9A964416EB7B" />
             <ComponentRef Id="cmpEDABBCF580D9E1ADF395288BC0172916" />
@@ -8515,7 +8532,7 @@
             <ComponentRef Id="cmpFEB0F35F5D5E5A5C9328F449F82C1466" />
             <ComponentRef Id="cmp80F88B5BA9BB0805FBBBE5D10EA29154" />
             <ComponentRef Id="cmp6649DC415E29D5783ADD40DAAF4CF547" />
-            <ComponentRef Id="cmp79FFF61DAD29DF01A233811F1FDCFFC6" />
+            <ComponentRef Id="cmpC25F2335247907D457A70705A2711C03" />
             <ComponentRef Id="cmp563BAD6350A491364BA89111CD89C443" />
             <ComponentRef Id="cmp092B24DFFF3F5C22A2BB39652F94885A" />
             <ComponentRef Id="cmp7376C43317212FAEF7104A02A25B54CE" />
@@ -8638,7 +8655,7 @@
             <ComponentRef Id="cmp8426E9EA1F73ACDC78498ED103E4EC60" />
             <ComponentRef Id="cmp735CD261640ACB6C957A19C3275D01B0" />
             <ComponentRef Id="cmp64FDF7BBDFF22A72407CBBABF8811306" />
-            <ComponentRef Id="cmpE3F4D800FB0DE8C5993F87542265241A" />
+            <ComponentRef Id="cmpED3EC7A9C55F9B1073BBA8A08F8CC0CC" />
             <ComponentRef Id="cmp05DFCA2FE650B545D65E63EB25A1FE40" />
             <ComponentRef Id="cmp4ACA799B9CE35D02545221C96D254A8D" />
             <ComponentRef Id="cmpB2D8A479CDDDBC7F56C4DC06A2D48307" />
@@ -8805,6 +8822,7 @@
             <ComponentRef Id="cmpC1146DF1455B5F3C51CFE9F1D3B6BCCB" />
             <ComponentRef Id="cmp78CD331CCB8F8AEC66433C6B2A38B421" />
             <ComponentRef Id="cmp9E49E3A3F7E7C6D302CF601A2456D33E" />
+            <ComponentRef Id="cmp1A9B3B1F07BDF6AFEDC1A44A2D697706" />
             <ComponentRef Id="cmpF2B3C0ABCE453CA80C8F2F34AB54B807" />
             <ComponentRef Id="cmp539EAF56D3FEE2D64A035453541F9C87" />
             <ComponentRef Id="cmp5E5E911FF341860A877EF18157A1902F" />
@@ -9103,6 +9121,8 @@
             <ComponentRef Id="cmpEEA84E86468E4C907714D589E7A4B342" />
             <ComponentRef Id="cmp6DDCE356EC6E299C9B045F87A149A7E0" />
             <ComponentRef Id="cmpCCBF9837B0D2AFA6AC6E8B9363524754" />
+            <ComponentRef Id="cmpC391546EDFFB35D95C2A80DF7E9A1984" />
+            <ComponentRef Id="cmp4EBC30B58F747A614DB324697777DD5F" />
             <ComponentRef Id="cmp23341545B71F086D998C69483AD6C7E4" />
             <ComponentRef Id="cmp2AF1E8C688949B50348283710414F67E" />
             <ComponentRef Id="cmpCCA71C342E36261D71302FCB72E8B95F" />
@@ -9188,7 +9208,7 @@
             <ComponentRef Id="cmp1AE842EAE7C3B36BA29AB9A43C5B52C9" />
             <ComponentRef Id="cmpE3E70B7F1BB0027BE2C79A30D416E218" />
             <ComponentRef Id="cmp2D0DB27443B26DA089879E0CF9B21C3D" />
-            <ComponentRef Id="cmpCA62A3C1BD146C703A63868AAF273C2C" />
+            <ComponentRef Id="cmp443AE8DDFFA51A4B8228254AF966FBF5" />
             <ComponentRef Id="cmpA56E65D043ABAE0288DD0B5928D53F69" />
             <ComponentRef Id="cmp454734466F90A688E8F55F49FDDBD7C0" />
             <ComponentRef Id="cmpEF832421EDF8BE1361060F4136061B9B" />
@@ -9808,12 +9828,10 @@
             <ComponentRef Id="cmp4B046BE7B4835A9B29941E13E02CCADF" />
             <ComponentRef Id="cmp5669EB63639E385073C49EBAFC1D3803" />
             <ComponentRef Id="cmp0B6C38A8363C78BD82577E2B65375918" />
-            <ComponentRef Id="cmp9A2B44BC2C10053D9FA5D00C7A868AA9" />
             <ComponentRef Id="cmpF8E00E122C0BA713BDAE6EDE96C6795F" />
             <ComponentRef Id="cmp373D9EE261C0F3B42464972C565621DA" />
             <ComponentRef Id="cmp7F68E510E33BC70221315D3987E47B57" />
             <ComponentRef Id="cmpC4AFAB6C7FAB3AD399654CA7AFD0DAC8" />
-            <ComponentRef Id="cmpA2B1AEA41FB0A90175E61D87FFF54D2E" />
             <ComponentRef Id="cmpEA0904A7D47CE8CB866DC561ABAF8D3E" />
             <ComponentRef Id="cmpAB9C53EB3CFC77805A1D85A856AE573C" />
             <ComponentRef Id="cmpD259A9431732FE700B4815A8356620B9" />
@@ -10765,7 +10783,6 @@
             <ComponentRef Id="cmp8FA665318B9035ECA097487B9794D0FF" />
             <ComponentRef Id="cmpD78B89B0F268A1D306EF606CBB2CC6CD" />
             <ComponentRef Id="cmpE1C63530FDB420970F8742371121D19D" />
-            <ComponentRef Id="cmp4FB77C2903ADAE91B2FDD2C697BBE725" />
             <ComponentRef Id="cmp1968A73260BFF4F1DE28B46187D4DFDC" />
             <ComponentRef Id="cmpF1DA032A31AD27D3D5F1F5694332697C" />
             <ComponentRef Id="cmpC53F92D8009FAAD45A51E9921C305A5F" />
@@ -10774,17 +10791,18 @@
             <ComponentRef Id="cmpE243F6AE5459A1DC2B79EFA2F4635455" />
             <ComponentRef Id="cmp8680A729CC89EAAD78773E6D90BF3703" />
             <ComponentRef Id="cmp036F9C2C32E7ECD189F195D23308929B" />
+            <ComponentRef Id="cmp5861767259AFB413B7DB3ED5E4F9D3AF" />
             <ComponentRef Id="cmpA884CCD5ACB91DDED78B49D4325979C2" />
             <ComponentRef Id="cmpE981B20B65AF0F945BECC1264551C0BD" />
             <ComponentRef Id="cmp717C5B827FFDBA58AB5F1B26C2E22A6E" />
+            <ComponentRef Id="cmp37B60FF7D87D001DFD8D9A446FF8C35A" />
             <ComponentRef Id="cmp6DBD42694DC4DE6EE783EE3740A43F59" />
             <ComponentRef Id="cmpBD9A92931DAE997D9EE799D28F3DC8CB" />
-            <ComponentRef Id="cmpF07071379FA15F6117D7F6EE4D14EB4A" />
             <ComponentRef Id="cmpE1425CF7681B2EA38D6FF15B1432D65C" />
             <ComponentRef Id="cmp6E5FA45458BF319BB3EC832D2C34A667" />
             <ComponentRef Id="cmp16A19CAE7309CE8E2DD569F5C240E028" />
             <ComponentRef Id="cmp336FE6273F43AC4F73BDE62DE2B33556" />
-            <ComponentRef Id="cmpF2342890849817BC6253B4FB71656DDB" />
+            <ComponentRef Id="cmpE4C065140D89F05A5513F61BA88DE22A" />
             <ComponentRef Id="cmp99DD5D8F1DA84F2CE412052951F14408" />
             <ComponentRef Id="cmpD4875810B21F8B9FF1A4A16BD1AE5F70" />
             <ComponentRef Id="cmp2FB25E61636151051A0E10A82A65134F" />
@@ -10802,7 +10820,9 @@
             <ComponentRef Id="cmp2C35C893522E5D007C117F4226194183" />
             <ComponentRef Id="cmpC94A43B9DF6D76EBF3D5F19F198CBE49" />
             <ComponentRef Id="cmpE24BE85C99DF41B45B3F8F6764E01125" />
+            <ComponentRef Id="cmp7D9222464CA6159928D271EB4C316596" />
             <ComponentRef Id="cmp131A76E5B93E1E90D4B99612981BED44" />
+            <ComponentRef Id="cmpE53253B06C2454AEC9EBE6B09D33541E" />
             <ComponentRef Id="cmpE7FAAFC8DE37DB70DF8A597B9C4CFDC7" />
             <ComponentRef Id="cmpC5C4843208D55BC93704943163E4E067" />
             <ComponentRef Id="cmp642E82B6720FB27CC5B19A7D56875D37" />
@@ -10811,6 +10831,7 @@
             <ComponentRef Id="cmp5082891FFEC48626A007026FFB8634CF" />
             <ComponentRef Id="cmpDFAA40B192F5E0E4BF7E69DF788328E2" />
             <ComponentRef Id="cmp62F5AA995D7DB6949DE84335F01A5D2B" />
+            <ComponentRef Id="cmp3B0B3086A7494E610E6C498CA0F96B27" />
             <ComponentRef Id="cmp2370C1C47A1E96F371359FA5DCB43F5D" />
             <ComponentRef Id="cmpB8D9C0B545CFD9F8BE030D77358BA8CB" />
             <ComponentRef Id="cmp3ED256F974F70DDD87311F9EF78BA4E7" />
@@ -10824,8 +10845,9 @@
             <ComponentRef Id="cmp2FD7E2ECA7AA821492BF1E7645A47AB1" />
             <ComponentRef Id="cmp7B3FE46B9655E060224050F12F735FCB" />
             <ComponentRef Id="cmpB72EFA5F358FCE3CC40172894C8C8909" />
+            <ComponentRef Id="cmp9FB25503B0DF28CE21589F239433E745" />
             <ComponentRef Id="cmpA29EAB197E3717DBFDEDD67A06EE2746" />
-            <ComponentRef Id="cmpCB6C6A112A8F30FBF763BBFA67C81582" />
+            <ComponentRef Id="cmpAFE0C4F1CF2150762687E06EA6C81378" />
             <ComponentRef Id="cmpBA6F1E195705786A5446DF23854AA446" />
             <ComponentRef Id="cmpC61DE86607C13D24C0E15528512352CF" />
             <ComponentRef Id="cmp784430FC827655574B20A3E1D43B501B" />
@@ -10844,11 +10866,11 @@
             <ComponentRef Id="cmpEA2BF52F3E39BF1DBE5C3AFA0BACFA33" />
             <ComponentRef Id="cmp3C5742C7FC2BAD65B3A40A439BAB79A3" />
             <ComponentRef Id="cmp3B654A108EA7EEB15BB4BE4EB155EE33" />
-            <ComponentRef Id="cmp4CA944D339415B2F15964668E85BBCBA" />
             <ComponentRef Id="cmp3786F0CEDF4448BC15D676A99073523E" />
             <ComponentRef Id="cmp35FF1EFC578D53F9F34ECB2781887CA7" />
             <ComponentRef Id="cmpF5279A7FE3D980DE5758F20E7A431070" />
             <ComponentRef Id="cmpC9A0304FA9C48F0DCC604E11BF2B36F8" />
+            <ComponentRef Id="cmp1F049A9E8BE0257EFF08C0638B8B8AD8" />
             <ComponentRef Id="cmpF34728075FC71D22483BFA5DA62BA2D5" />
             <ComponentRef Id="cmp1C009C4D1542FDA13E643941AA0DA3D0" />
             <ComponentRef Id="cmp07CD41AE402AC2330905D38458E50E12" />
