@@ -5,9 +5,9 @@
 -->
 <xsl:stylesheet
   version="1.0"
-  xmlns="http://schemas.microsoft.com/wix/2006/wi"
+  xmlns="http://wixtoolset.org/schemas/v4/wxs"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:wix="http://schemas.microsoft.com/wix/2006/wi"
+  xmlns:wix="http://wixtoolset.org/schemas/v4/wxs"
   xmlns:str="http://xsltsl.org/string"
   exclude-result-prefixes="wix str"
   >
@@ -54,8 +54,8 @@
 	<!-- Add a never true condition for the .gitkeep file - we are doing this instead of removing it, because the ComponentRef element in the "SqlDeveloperComponents" ComponentGroup also has to be removed -->
 	<xsl:template match='wix:Component[contains(wix:File/@Source, "$(var.SqlDeveloperHarvestFolder)\.gitkeep")]'>
 		<xsl:copy>
+			<xsl:attribute name="Condition">1 = 0</xsl:attribute>
 			<xsl:apply-templates select="@*|node()"/>
-			<Condition>1 = 0</Condition>
 		</xsl:copy>
 	</xsl:template>
 

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
 	<!-- Use the file version of the SqlDeveloper executable as the product version -->
 	<?define ProductVersion = !(bind.FileVersion.ReferenceExe) ?>
 	<?define ProductName = "SQL Developer" ?>
@@ -8,55 +7,51 @@
 	<?define ReferenceExecutable = "sqldeveloper.exe" ?>
 	<?define ReferenceExecutableFolder = "sqldeveloper" ?>
 
-	<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e">
-		<Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" Platform="x64" InstallPrivileges="elevated"
-				 Description="Oracle SQL Developer $(var.ProductVersion)"
-			     Comments="SQL Developer with JDK installation package (unofficial)"/>
+	<Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e" Scope="perMachine" >
+		<SummaryInformation Description="Oracle SQL Developer $(var.ProductVersion)" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes" Schedule="afterInstallValidate" />
 		<MediaTemplate EmbedCab="yes" />
 
 		<!-- Set the install icon to whatever the SqlDeveloper executable is using -->
-		<Icon Id="sqldeveloper.exe" SourceFile="$(var.SolutionDir)\$(var.ReferenceExecutableFolder)\$(var.ReferenceExecutable)"/>
+		<Icon Id="sqldeveloper.exe" SourceFile="$(var.SolutionDir)\$(var.ReferenceExecutableFolder)\$(var.ReferenceExecutable)" />
 		<Property Id="ARPPRODUCTICON" Value="sqldeveloper.exe" />
 		<!-- Don't allow Modify from Installed Apps -->
-		<Property Id="ARPNOMODIFY" Value="yes"  Secure="yes" />
+		<Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
 		<Property Id="DISABLEADVTSHORTCUTS" Value="1" />
 
-		<Feature Id="ProductFeature" Title="SQLDeveloper" Level="1" AllowAdvertise="no" InstallDefault="local" TypicalDefault="install" Absent="disallow">
+		<Feature Id="ProductFeature" Title="SQLDeveloper" Level="1" AllowAdvertise="no" InstallDefault="local" TypicalDefault="install" AllowAbsent="no">
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentGroupRef Id="EnvironmentChanges" />
 			<ComponentGroupRef Id="SqlDeveloperComponents" />
 			<ComponentGroupRef Id="RegistryChanges" />
-			<ComponentRef Id="ProgramMenuDir"/>
+			<ComponentRef Id="ProgramMenuDir" />
 			<Feature Id="PublicDesktopShortcut" Title="Add desktop shortut" Level="1" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
-				<ComponentRef Id="DesktopShortcut"/>
+				<ComponentRef Id="DesktopShortcut" />
 			</Feature>
 		</Feature>
 
 		<!-- Use the UI that allows an install directory to be chosen-->
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 		<WixVariable Id="WixUILicenseRtf" Value="oraclelicense.rtf" />
-		<UIRef Id="WixUI_FeatureTree" />
-	</Product>
+		<ui:WixUI Id="WixUI_FeatureTree" />
+	</Package>
 
 	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
 			<!-- Public desktop directory -->
-			<Directory Id="DesktopFolder" Name="Desktop">
-			</Directory>
+			<StandardDirectory Id="DesktopFolder">
+			</StandardDirectory>
 			<!-- Start menu directories -->
-			<Directory Id="ProgramMenuFolder" >
+			<StandardDirectory Id="ProgramMenuFolder">
 				<Directory Id="ProgramMenuDir" Name="$(var.ProductName)">
 				</Directory>
-			</Directory>
-			<Directory Id="ProgramFiles64Folder">
+			</StandardDirectory>
+			<StandardDirectory Id="ProgramFiles64Folder">
 				<Directory Id="MANUFACTURERFOLDER" Name="$(var.ProductManufacturer)">
 					<Directory Id="INSTALLFOLDER" Name="sqldeveloper" />
 				</Directory>
-			</Directory>
-		</Directory>
-	</Fragment>
+			</StandardDirectory>
+		</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="EnvironmentChanges" Directory="TARGETDIR">
@@ -69,14 +64,13 @@
 		</ComponentGroup>
 		<ComponentGroup Id="ProductComponents" Directory="MANUFACTURERFOLDER">
 			<!-- this will never be installed (Condition is never true) - it's just here so we can get the file version and icon -->
-			<Component Id="ReferenceExectable" Guid="{DFD20123-DE91-40AD-BDC2-1F2B77BCC3D7}" Win64="yes" >
+			<Component Id="ReferenceExectable" Guid="{DFD20123-DE91-40AD-BDC2-1F2B77BCC3D7}" Condition="1 = 0" Bitness="always64">
 				<File Id="ReferenceExe" KeyPath="yes" Source="$(var.SolutionDir)\$(var.ReferenceExecutableFolder)\$(var.ReferenceExecutable)" />
-				<Condition>1 = 0</Condition>
 			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="RegistryChanges" Directory="TARGETDIR">
 			<Component Id="RootProductRegistrtyKey" Guid="{30D5672A-F8B1-4116-8652-F82606C3AEE8}">
-				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes" >
+				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
 					<RegistryValue Name="InstallDir" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
 					<RegistryValue Name="Version" Type="string" Value="$(var.ProductVersion)" />
 				</RegistryKey>
@@ -85,18 +79,18 @@
 	</Fragment>
 
 	<Fragment>
-		<DirectoryRef Id="DesktopFolder">
+		<StandardDirectory Id="DesktopFolder">
 			<!-- 
 			The ICE57 warning is being suppressed for these registry entries - light doesn't know that the installer only does per-machine installs. 
 			-->
-			<Component Id="DesktopShortcut" Guid="{4A982BA2-B095-452A-BFFF-492E9D3B2D29}" >
+			<Component Id="DesktopShortcut" Guid="{4A982BA2-B095-452A-BFFF-492E9D3B2D29}">
 				<Shortcut Id="SqlDeveloperExeDesktopShortcut" Name="SQL Developer" Advertise="no" Icon="sqldeveloper.exe" WorkingDirectory="INSTALLFOLDER" Target="[INSTALLFOLDER]\$(var.ReferenceExecutable)"></Shortcut>
-				<RemoveFolder Id="RemoveDesktopShortcut" On="uninstall"/>
+				<RemoveFolder Id="RemoveDesktopShortcut" On="uninstall" />
 				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]">
 					<RegistryValue Name="PublicDesktopShortcut" Type="string" Value="[DesktopFolder]SQL Developer.lnk" KeyPath="yes" />
 				</RegistryKey>
 			</Component>
-		</DirectoryRef>
+		</StandardDirectory>
 		<DirectoryRef Id="ProgramMenuDir">
 			<Component Id="ProgramMenuDir" Guid="{FEB80A59-37EF-4738-97AA-D00796914774}">
 				<RemoveFolder Id="ProgramMenuDir" On="uninstall" />
