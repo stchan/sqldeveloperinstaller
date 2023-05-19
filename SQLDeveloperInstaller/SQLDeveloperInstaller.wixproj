@@ -1,59 +1,55 @@
-﻿<Project InitialTargets="ShowVersion">
-  <Target Name="ShowVersion">
-    <!-- Writes sqldevelop.eer.exxe file version to the Output Window -->
-    <Exec Command="powershell -noninteractive -command &quot;Write-Host sqldeveloper.exe version is(get-item ..\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion&quot;" ConsoleToMSBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="SqlDevVersion" />
-    </Exec>
-  </Target>
-  <PropertyGroup>
-    <InstallerName>$(MSBuildProjectName)</InstallerName>
-    <InstallerVersion></InstallerVersion>
-    <TargetName>$(InstallerName)_$(Platform)</TargetName>
-  </PropertyGroup>
-  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.0" />
-  <PropertyGroup>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-  </PropertyGroup>
-  <PropertyGroup>
-    <InstallerPlatform>x64</InstallerPlatform>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <DefineConstants>Debug</DefineConstants>
-    <SuppressSpecificWarnings>
-    </SuppressSpecificWarnings>
-    <SuppressIces>ICE57</SuppressIces>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DefineConstants>SqlDeveloperHarvestFolder=..\sqldeveloper</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <!-- 
+﻿<Project>
+	<PropertyGroup>
+		<InstallerName>$(MSBuildProjectName)</InstallerName>
+		<InstallerVersion>
+		</InstallerVersion>
+		<TargetName>$(InstallerName)_$(InstallerVersion)_$(Platform)</TargetName>
+	</PropertyGroup>
+	<Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.0" />
+	<PropertyGroup>
+		<Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+	</PropertyGroup>
+	<PropertyGroup>
+		<InstallerPlatform>x64</InstallerPlatform>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+		<DefineConstants>Debug</DefineConstants>
+		<SuppressSpecificWarnings>
+		</SuppressSpecificWarnings>
+		<SuppressIces>ICE57</SuppressIces>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup>
+		<DefineConstants>SqlDeveloperHarvestFolder=..\sqldeveloper</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+		<!-- 
       ICE61 suppressed because same version upgrades will be allowed. The version number is tied to sqldeveloper.exe, and allowing same version upgrades allows an MSI with fixes to upgrade an older one with the same version. 
       ICE57 - See comments in Product.wxs file for notes.
     -->
-    <SuppressIces>ICE57;ICE61</SuppressIces>
-    <DefineConstants>SqlDeveloperHarvestFolder=..\sqldeveloper</DefineConstants>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <Content Include="SqlDeveloper.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
-    <PackageReference Include="WixToolset.Heat" Version="4.0.0" />
-  </ItemGroup>
-  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.0" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <OutputType>Package</OutputType>
-  </PropertyGroup>
-  <Target Name="BeforeBuild">
-    <!-- Heat Harvest -->
-    <HeatDirectory NoLogo="$(HarvestDirectoryNoLogo)" SuppressAllWarnings="$(HarvestDirectorySuppressAllWarnings)" SuppressSpecificWarnings="$(HarvestDirectorySuppressSpecificWarnings)" ToolPath="$(WixToolPath)" TreatWarningsAsErrors="$(HarvestDirectoryTreatWarningsAsErrors)" TreatSpecificWarningsAsErrors="$(HarvestDirectoryTreatSpecificWarningsAsErrors)" VerboseOutput="$(HarvestDirectoryVerboseOutput)" AutogenerateGuids="$(HarvestDirectoryAutogenerateGuids)" GenerateGuidsNow="$(HarvestDirectoryGenerateGuidsNow)" OutputFile="SqlDeveloperComponents.wxs" SuppressFragments="$(HarvestDirectorySuppressFragments)" SuppressUniqueIds="$(HarvestDirectorySuppressUniqueIds)" Transforms="SqlDeveloper.xslt" Directory="$(SolutionDir)sqldeveloper" ComponentGroupName="SqlDeveloperComponents" DirectoryRefId="INSTALLFOLDER" KeepEmptyDirectories="true" PreprocessorVariable="var.SqlDeveloperHarvestFolder" SuppressCom="true" SuppressRootDirectory="true" SuppressRegistry="true">
-    </HeatDirectory>
-  </Target>
+		<SuppressIces>ICE57;ICE61</SuppressIces>
+		<DefineConstants>SqlDeveloperHarvestFolder=..\sqldeveloper</DefineConstants>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Include="SqlDeveloper.xslt" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
+		<PackageReference Include="WixToolset.Heat" Version="4.0.0" />
+	</ItemGroup>
+	<Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.0" />
+	<PropertyGroup>
+		<PostBuildEvent>
+		</PostBuildEvent>
+		<PreBuildEvent>
+		</PreBuildEvent>
+		<OutputType>Package</OutputType>
+		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	</PropertyGroup>
+	<Target Name="BeforeBuild">
+		<!-- Heat Harvest -->
+		<HeatDirectory NoLogo="$(HarvestDirectoryNoLogo)" SuppressAllWarnings="$(HarvestDirectorySuppressAllWarnings)" SuppressSpecificWarnings="$(HarvestDirectorySuppressSpecificWarnings)" ToolPath="$(WixToolPath)" TreatWarningsAsErrors="$(HarvestDirectoryTreatWarningsAsErrors)" TreatSpecificWarningsAsErrors="$(HarvestDirectoryTreatSpecificWarningsAsErrors)" VerboseOutput="$(HarvestDirectoryVerboseOutput)" AutogenerateGuids="$(HarvestDirectoryAutogenerateGuids)" GenerateGuidsNow="$(HarvestDirectoryGenerateGuidsNow)" OutputFile="SqlDeveloperComponents.wxs" SuppressFragments="$(HarvestDirectorySuppressFragments)" SuppressUniqueIds="$(HarvestDirectorySuppressUniqueIds)" Transforms="SqlDeveloper.xslt" Directory="$(SolutionDir)sqldeveloper" ComponentGroupName="SqlDeveloperComponents" DirectoryRefId="INSTALLFOLDER" KeepEmptyDirectories="true" PreprocessorVariable="var.SqlDeveloperHarvestFolder" SuppressCom="true" SuppressRootDirectory="true" SuppressRegistry="true">
+		</HeatDirectory>
+	</Target>
 </Project>
