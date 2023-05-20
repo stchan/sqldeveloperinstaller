@@ -47,6 +47,7 @@ mkdir -p $buildoutputpath
 $sqldevversion = (get-item .\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion
 Write-Host sqldeveloper.exe version is $sqldevversion
 
+dotnet clean --configuration Release
 dotnet build -p:Configuration=Release -p:InstallerName=$name -p:InstallerVersion=$sqldevversion -p:OutputPath="$buildoutputpath" SQLDeveloperInstaller.sln
 
 # sign the installer if -sign was specified
