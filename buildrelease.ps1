@@ -1,8 +1,10 @@
+#Requires -Version 7.2
 param (
    [string]$name = "sqldeveloper",
    [switch]$sign = $false
 )
 
+$startworkinglocation = Get-Location
 
 if ($sign)
 {
@@ -42,7 +44,7 @@ Set-Location -Path $PSScriptRoot
 
 # Remove old stuff
 Remove-Item -path $buildoutputpath -recurse -ErrorAction SilentlyContinue
-mkdir -p $buildoutputpath
+mkdir -p $buildoutputpath | Out-Null
 
 $sqldevversion = (get-item .\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion
 Write-Host sqldeveloper.exe version is $sqldevversion
@@ -53,5 +55,14 @@ dotnet build -p:Configuration=Release -p:InstallerName=$name -p:InstallerVersion
 # sign the installer if -sign was specified
 if ($sign -eq $true)
 {
-   signtool.exe sign /sha1 $env:CodeSignHash /t http://time.certum.pl /fd sha256 /v "$buildoutputpath\en-us\*.msi"
+   signtool.exe sign /sha1 $env:CodeSignHash /t http://time.certum.pl /fd sha256 /v "$buildoutputpath\$((Get-Culture).Name)\*.msi"
 }
+
+Set-Location -Path "$buildoutputpath\$((Get-Culture).Name)\"
+
+$outputfiles = Get-ChildItem "."
+foreach ($outfile in $outputfiles) {
+    certutil -hashfile $outfile.Name sha512  | Out-File -Encoding utf8NoBOM  -FilePath "$outfile.sha512"
+}
+
+Set-Location -Path $startworkinglocation
