@@ -69,6 +69,7 @@ if ($sign -eq $true)
 
 Set-Location -Path "$buildoutputpath\$((Get-Culture).Name)\"
 
+# compute hashes of the output
 $outputfiles = Get-ChildItem "."
 foreach ($outfile in $outputfiles) {
     certutil -hashfile $outfile.Name sha512  | Out-File -Encoding utf8NoBOM  -FilePath "$outfile.sha512"
