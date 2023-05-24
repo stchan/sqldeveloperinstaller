@@ -1,6 +1,7 @@
 #Requires -Version 7.2
 param (
    [string]$name = "sqldeveloper",
+   [string]$versionoverride = $null,
    [switch]$sign = $false
 )
 
@@ -8,31 +9,31 @@ $startworkinglocation = Get-Location
 
 if ($sign)
 {
-        if (Test-Path "$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\Tools\Launch-VsDevShell.ps1")
+        $vspaths = @("$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\2022\Professional\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\Launch-VsDevShell.ps1")
+        foreach ($testvspath in $vspaths)
         {
-            $initvsdevshell = "$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\Tools\Launch-VsDevShell.ps1"
+            if (Test-Path $testvspath)
+            {
+                $initvsdevshell = $testvspath
+                break;
+            }        
         }
-        elseif (Test-Path "$env:ProgramFiles\Microsoft Visual Studio\2022\Professional\Common7\Tools\Launch-VsDevShell.ps1")
-        {
-            $initvsdevshell = "$env:ProgramFiles\Microsoft Visual Studio\2022\Professional\Common7\Tools\Launch-VsDevShell.ps1"
-        }
-        elseif (Test-Path "$env:ProgramFiles\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\Launch-VsDevShell.ps1")
-        {
-            $initvsdevshell = "$env:ProgramFiles\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\Launch-VsDevShell.ps1"
-        }
-        if ($initvsdevshell)
+        if ([string]::IsNullOrEmpty($initvsdevshell) -eq $true)
         { 
-            & $initvsdevshell
+            Write-Output 'Visual Studio 2022 was not found - VS developer shell launch script was not run.'
         }
-        else
+        $requiredexecutables = @("msbuild.exe", "signtool.exe")
+        foreach ($required in $requiredexecutables)
         {
-            Write-Output 'Visual Studio 2022 was not found - VS developer shell launch script will not be run.'
+            Write-Host Searching for $required in PATH.
+            if ((Get-Command "$required" -ErrorAction SilentlyContinue) -eq $null) 
+            { 
+                Write-Host "$required not found in PATH. Exiting."
+                exit 1
+            }
+            Write-Host $required found.
         }
-        if ((Get-Command "msbuild.exe" -ErrorAction SilentlyContinue) -eq $null) 
-        { 
-            Write-Host "msbuild.exe not found in PATH. Exiting."
-            exit 1
-        }
+
         $buildoutputpath = "$PSScriptRoot\publish\signed"
 }
 else {
@@ -46,8 +47,16 @@ Set-Location -Path $PSScriptRoot
 Remove-Item -path $buildoutputpath -recurse -ErrorAction SilentlyContinue
 mkdir -p $buildoutputpath | Out-Null
 
+# set the version string used in the MSI filename
 $sqldevversion = (get-item .\sqldeveloper\sqldeveloper.exe).VersionInfo.FileVersion
 Write-Host sqldeveloper.exe version is $sqldevversion
+# use the -versionoverride parameter if set
+if ([string]::IsNullOrEmpty($versionoverride) -eq $false)
+{
+    $sqldevversion = $versionoverride
+    Write-Host "Version manually set to $versionoverride (will not change the product version, only the MSI filename)" 
+}
+
 
 dotnet clean --configuration Release
 dotnet build -p:Configuration=Release -p:InstallerName=$name -p:InstallerVersion=$sqldevversion -p:OutputPath="$buildoutputpath" SQLDeveloperInstaller.sln
