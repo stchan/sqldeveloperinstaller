@@ -5,6 +5,8 @@ param (
    [switch]$sign = $false
 )
 
+Set-StrictMode -version 2
+
 $startworkinglocation = Get-Location
 
 if ($sign)
@@ -21,6 +23,9 @@ if ($sign)
         if ([string]::IsNullOrEmpty($initvsdevshell) -eq $true)
         { 
             Write-Output 'Visual Studio 2022 was not found - VS developer shell launch script was not run.'
+        }
+        else {
+            & $initvsdevshell
         }
         $requiredexecutables = @("msbuild.exe", "signtool.exe")
         foreach ($required in $requiredexecutables)
