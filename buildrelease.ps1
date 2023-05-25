@@ -4,11 +4,13 @@ param (
    [string]$versionoverride = $null,
    [switch]$sign = $false
 )
+if ($args.Count) { throw "Unexpected arguments passed: $args" }
 
 Set-StrictMode -version 2
 
 $startworkinglocation = Get-Location
 
+# If -sign commandline argument was passed, run the VS 2022 Dev Shell script so signtool.exe is in the PATH
 if ($sign)
 {
         $vspaths = @("$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\2022\Professional\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\Launch-VsDevShell.ps1")
@@ -20,13 +22,15 @@ if ($sign)
                 break;
             }        
         }
-        if ([string]::IsNullOrEmpty($initvsdevshell) -eq $true)
+        if ([string]::IsNullOrEmpty($initvsdevshell) -eq $false)
         { 
-            Write-Output 'Visual Studio 2022 was not found - VS developer shell launch script was not run.'
-        }
-        else {
             & $initvsdevshell
         }
+        else 
+        {
+            Write-Output 'Visual Studio 2022 was not found - VS developer shell launch script was not run.'            
+        }
+
         $requiredexecutables = @("msbuild.exe", "signtool.exe")
         foreach ($required in $requiredexecutables)
         {
