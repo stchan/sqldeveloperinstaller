@@ -1,8 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <InstallerName>$(MSBuildProjectName)</InstallerName>
-    <InstallerVersion>
-    </InstallerVersion>
+    <InstallerVersion>0.0.0.0</InstallerVersion>
     <TargetName>$(InstallerName)_$(InstallerVersion)_$(Platform)</TargetName>
   </PropertyGroup>
   <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.0" />

@@ -9,14 +9,13 @@ Any content that is not the property of Oracle (SQL Developer and its associated
 
 ## Tooling
 * Visual Studio 2022
-* Wix 3.11
-* Votive 2022 (Wix VS Extension)
+* Wix 4
 
 ## Building
 1. Download the Windows 64-bit with JDK included archive from [here](https://www.oracle.com/database/sqldeveloper/technologies/download/).
-1. Extract the "sqldeveloper" folder in the archive under the solution folder (ie. at the same level as the "SQLDeveloperInstaller" project folder). You can overwrite an empty existing "sqldeveloper" folder - .gitignore has an entry for that folder. If there are files in the folder (ie. an upgrade situation), I recommend emptying, or deleting it first, as the harvest process (heat.exe) will gather everything. Any old/obsolete files would be included.
-1. Set the solution configuration to "Release", and the platform to "x64".
-1. Build the solution - the MSI will be in "bin\Release"
+1. Extract the "sqldeveloper" folder in the archive under the solution folder (ie. at the same level as the "SQLDeveloperInstaller" project folder). You can overwrite an empty existing "sqldeveloper" folder - .gitignore has an entry for that folder. If there are files in the folder (ie. an upgrade situation), I recommend emptying, or deleting it first, as the harvest process will gather everything. Any old/obsolete files would be included.
+1. Run the **buildrelease.ps1** script. Powershell 7.2 (or newer) is required.
+1. The MSI will be in "publish\unsigned\\<culture>". If you build from within VS 2022, the MSI filename will have a version component of "0.0.0.0" - this is because Wix 4.0 no longer uses the "targetname" property. Run the powershell script if you want an MSI with a filename that reflects the **sqldeveloper.exe** version.
 
 ## Notes
 * The installer derives its version from "sqldeveloper.exe", so as long as Oracle increments the file version every release, new MSIs will automatically be able to upgrade old installs.
