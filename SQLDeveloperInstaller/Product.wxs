@@ -69,7 +69,7 @@
 			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="RegistryChanges" Directory="TARGETDIR">
-			<Component Id="RootProductRegistrtyKey" Guid="{30D5672A-F8B1-4116-8652-F82606C3AEE8}">
+			<Component Id="RootProductRegistryKey" Guid="{30D5672A-F8B1-4116-8652-F82606C3AEE8}">
 				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
 					<RegistryValue Name="InstallDir" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
 					<RegistryValue Name="Version" Type="string" Value="$(var.ProductVersion)" />
