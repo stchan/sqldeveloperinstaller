@@ -58,8 +58,9 @@
 			<Component Id="SystemPathUpdate" Guid="{F224D9FB-8176-4FB4-8AD7-622223D18B74}">
 				<!-- add sqldeveloper to the system path -->
 				<Environment Id="SQLDEVELOPERPATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="yes" />
-				<!-- add sqldeveloper\bin to the system path (for sql.exe) -->
+				<!-- add sqldeveloper\bin to the system path (for sql.exe) 
 				<Environment Id="SQLPATH" Name="PATH" Value="[INSTALLFOLDER]sqldeveloper\bin" Permanent="no" Part="last" Action="set" System="yes" />
+				-->
 			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="ProductComponents" Directory="MANUFACTURERFOLDER">
