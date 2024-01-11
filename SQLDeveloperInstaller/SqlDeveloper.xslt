@@ -36,21 +36,6 @@
 			  On="uninstall" />
 		</xsl:copy>
 	</xsl:template>
-	<xsl:template match='wix:Component[contains(wix:File/@Source, "$(var.SqlDeveloperHarvestFolder)\sqldeveloper\bin\sql.exe")]'>
-		<xsl:copy>
-			<xsl:apply-templates select="@*|node()"/>
-			<Shortcut
-			  Id="SqlclShortcut"
-			  Name="SQLcl"
-			  Directory="ProgramMenuDir"
-			  Advertise="yes">
-			</Shortcut>
-			<RemoveFolder
-			  Id="SqlclShortcut"
-			  Directory="ProgramMenuDir"
-			  On="uninstall" />
-		</xsl:copy>
-	</xsl:template>
 	<!-- Add a never true condition for the .gitkeep file - we are doing this instead of removing it, because the ComponentRef element in the "SqlDeveloperComponents" ComponentGroup also has to be removed -->
 	<xsl:template match='wix:Component[contains(wix:File/@Source, "$(var.SqlDeveloperHarvestFolder)\.gitkeep")]'>
 		<xsl:copy>
