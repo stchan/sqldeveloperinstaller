@@ -10,7 +10,7 @@
 	<Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e" Scope="perMachine" >
 		<SummaryInformation Description="Oracle SQL Developer $(var.ProductVersion)" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes" Schedule="afterInstallValidate" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="no" />
 		<MediaTemplate EmbedCab="yes" />
 
 		<!-- Set the install icon to whatever the SqlDeveloper executable is using -->
@@ -19,6 +19,8 @@
 		<!-- Don't allow Modify from Installed Apps -->
 		<Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
 		<Property Id="DISABLEADVTSHORTCUTS" Value="1" />
+		<!-- Check for administrator privileges -->
+		<Property Id="MSIUSEREALADMINDETECTION" Value="1" />
 
 		<Feature Id="ProductFeature" Title="SQLDeveloper" Level="1" AllowAdvertise="no" InstallDefault="local" TypicalDefault="install" AllowAbsent="no">
 			<ComponentGroupRef Id="ProductComponents" />
