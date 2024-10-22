@@ -19,8 +19,6 @@
 		<!-- Don't allow Modify from Installed Apps -->
 		<Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
 		<Property Id="DISABLEADVTSHORTCUTS" Value="1" />
-		<!-- Check for administrator privileges -->
-		<Property Id="MSIUSEREALADMINDETECTION" Value="1" />
 
 		<Feature Id="ProductFeature" Title="SQLDeveloper" Level="1" AllowAdvertise="no" InstallDefault="local" TypicalDefault="install" AllowAbsent="no">
 			<ComponentGroupRef Id="ProductComponents" />
