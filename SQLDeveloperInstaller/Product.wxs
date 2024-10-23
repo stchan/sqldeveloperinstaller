@@ -34,24 +34,27 @@
 		<!-- Use the UI that allows an install directory to be chosen-->
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 		<WixVariable Id="WixUILicenseRtf" Value="oraclelicense.rtf" />
-		<ui:WixUI Id="WixUI_FeatureTree" />
+		<UI Id="UI">
+			<ui:WixUI Id="WixUI_FeatureTree" />
+			<UIRef Id="WixUI_ErrorProgressText" />
+		</UI>
 	</Package>
 
 	<Fragment>
-			<!-- Public desktop directory -->
-			<StandardDirectory Id="DesktopFolder">
-			</StandardDirectory>
-			<!-- Start menu directories -->
-			<StandardDirectory Id="ProgramMenuFolder">
-				<Directory Id="ProgramMenuDir" Name="$(var.ProductName)">
-				</Directory>
-			</StandardDirectory>
-			<StandardDirectory Id="ProgramFiles64Folder">
-				<Directory Id="MANUFACTURERFOLDER" Name="$(var.ProductManufacturer)">
-					<Directory Id="INSTALLFOLDER" Name="sqldeveloper" />
-				</Directory>
-			</StandardDirectory>
-		</Fragment>
+		<!-- Public desktop directory -->
+		<StandardDirectory Id="DesktopFolder">
+		</StandardDirectory>
+		<!-- Start menu directories -->
+		<StandardDirectory Id="ProgramMenuFolder">
+			<Directory Id="ProgramMenuDir" Name="$(var.ProductName)">
+			</Directory>
+		</StandardDirectory>
+		<StandardDirectory Id="ProgramFiles64Folder">
+			<Directory Id="MANUFACTURERFOLDER" Name="$(var.ProductManufacturer)">
+				<Directory Id="INSTALLFOLDER" Name="sqldeveloper" />
+			</Directory>
+		</StandardDirectory>
+	</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="EnvironmentChanges" Directory="TARGETDIR">
