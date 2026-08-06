@@ -10,10 +10,10 @@ Set-StrictMode -version 2
 
 $startworkinglocation = Get-Location
 
-# If -sign commandline argument was passed, run the VS 2022 Dev Shell script so signtool.exe is in the PATH
+# If -sign commandline argument was passed, run the VS 2026 Dev Shell script so signtool.exe is in the PATH
 if ($sign)
 {
-        $vspaths = @("$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\2022\Professional\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\Launch-VsDevShell.ps1")
+        $vspaths = @("$env:ProgramFiles\Microsoft Visual Studio\18\Community\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\18\Professional\Common7\Tools\Launch-VsDevShell.ps1","$env:ProgramFiles\Microsoft Visual Studio\18\BuildTools\Common7\Tools\Launch-VsDevShell.ps1")
         foreach ($testvspath in $vspaths)
         {
             if (Test-Path $testvspath)
@@ -28,7 +28,7 @@ if ($sign)
         }
         else 
         {
-            Write-Output 'Visual Studio 2022 was not found - VS developer shell launch script was not run.'            
+            Write-Output 'Visual Studio 2026 was not found - VS developer shell launch script was not run.'            
         }
 
         $requiredexecutables = @("msbuild.exe", "signtool.exe")
@@ -67,8 +67,8 @@ if ([string]::IsNullOrEmpty($versionoverride) -eq $false)
 }
 
 
-dotnet clean --configuration Release
-dotnet build -p:Configuration=Release -p:InstallerName=$name -p:InstallerVersion=$sqldevversion -p:OutputPath="$buildoutputpath" SQLDeveloperInstaller.sln
+dotnet clean --configuration Release -p:Platform="x64"
+dotnet build -p:Configuration=Release  -p:Platform="x64" -p:InstallerName=$name -p:InstallerVersion=$sqldevversion -p:OutputPath="$buildoutputpath" SQLDeveloperInstaller.slnx
 
 # sign the installer if -sign was specified
 if ($sign -eq $true)
@@ -81,7 +81,7 @@ Set-Location -Path "$buildoutputpath\$((Get-Culture).Name)\"
 # compute hashes of the output
 $outputfiles = Get-ChildItem "."
 foreach ($outfile in $outputfiles) {
-    certutil -hashfile $outfile.Name sha512  | Out-File -Encoding utf8NoBOM  -FilePath "$outfile.sha512"
+    certutil -hashfile $outfile.Name sha256  | Out-File -Encoding utf8NoBOM  -FilePath "$outfile.sha256"
 }
 
 Set-Location -Path $startworkinglocation
