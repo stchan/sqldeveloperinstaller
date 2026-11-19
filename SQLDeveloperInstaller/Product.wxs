@@ -1,14 +1,10 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-	<!-- Use the file version of the SqlDeveloper executable as the product version -->
-	<?define ProductVersion = !(bind.FileVersion.ReferenceExe) ?>
-	<?define ProductName = "SQL Developer" ?>
-	<?define ProductManufacturer = "Oracle" ?>
-	<!-- the executable file we're using to set version number, and the Installed Apps icon -->
+	<!-- the executable file we're using to set the Installed Apps icon -->
 	<?define ReferenceExecutable = "sqldeveloper.exe" ?>
 	<?define ReferenceExecutableFolder = "sqldeveloper" ?>
 
-	<Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e" Scope="perMachine" >
-		<SummaryInformation Description="Oracle SQL Developer $(var.ProductVersion)" />
+	<Package Name="$(ProductName)" Language="1033" Version="$(ProductVersion)" Manufacturer="$(Manufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e" Scope="perMachine" >
+		<SummaryInformation Description="Oracle SQL Developer $(ProductVersion)" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="no" />
 		<MediaTemplate EmbedCab="yes" />
@@ -50,7 +46,7 @@
 			</Directory>
 		</StandardDirectory>
 		<StandardDirectory Id="ProgramFiles64Folder">
-			<Directory Id="MANUFACTURERFOLDER" Name="$(var.ProductManufacturer)">
+			<Directory Id="MANUFACTURERFOLDER" Name="$(var.Manufacturer)">
 				<Directory Id="INSTALLFOLDER" Name="sqldeveloper" />
 			</Directory>
 		</StandardDirectory>

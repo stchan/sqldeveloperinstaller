@@ -4,5 +4,8 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.build.props" />
+  </Folder>
   <Project Path="SQLDeveloperInstaller/SQLDeveloperInstaller.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" />
 </Solution>

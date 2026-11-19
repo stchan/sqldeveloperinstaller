@@ -1,0 +1,10 @@
+<Project>
+	<PropertyGroup>
+		<Company>Oracle</Company>
+		<Copyright>Copyright © Oracle 2026</Copyright>
+		<AssemblyTrademark></AssemblyTrademark>
+		<AssemblyCulture></AssemblyCulture>
+		<ProductName>SQL Developer</ProductName>
+		<ProductVersion>26.2.0.187</ProductVersion>
+	</PropertyGroup>
+</Project>
