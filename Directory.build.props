@@ -7,6 +7,6 @@
 		<ProductName>SQL Developer</ProductName>
 		<!-- used for the msi filename -->
 		<ProductShortName>sqldeveloper</ProductShortName>
-		<ProductVersion>26.2.0.187</ProductVersion>
+		<ProductVersion>26.2.1.0</ProductVersion>
 	</PropertyGroup>
 </Project>

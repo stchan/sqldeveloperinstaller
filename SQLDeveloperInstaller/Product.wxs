@@ -4,7 +4,7 @@
 	<Package Name="$(ProductName)" Language="1033" Version="$(ProductVersion)" Manufacturer="$(Manufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e" Scope="perMachine" >
 		<SummaryInformation Description="Oracle SQL Developer $(ProductVersion)" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="no" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="no" Schedule="afterInstallInitialize" />
 		<MediaTemplate EmbedCab="yes" />
 
 		<!-- Set the install icon to whatever the SqlDeveloper executable is using -->
