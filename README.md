@@ -1,4 +1,4 @@
-# SQL Developer (with JDK) Installer for Windows x64 - v26.2.0.187
+# SQL Developer (with JDK) Installer for Windows x64 - v26.2.1.0
 Oracle does not provide a SQL Developer installation package for Windows. This VS project will build an MSI for 64-bit Windows that will install SQL Developer and its included JDK, update the system path, create program menu entries, and (optionally) create a public desktop shortcut.
 
 ## Disclaimers
