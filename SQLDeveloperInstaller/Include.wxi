@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<?define JREReferenceExecutable = "java.exe" ?>
+	<?define JREReferenceExecutableFolder = "jdk\jre\bin" ?>
+	<?define JREVersion = !(bind.FileVersion.JREReferenceExecutable) ?>
+	<?define JREInstallLevel = 1000 ?>
+	<!-- the executable file we're using to set the Oracle (true) version number, and the Installed Apps icon -->
+	<?define ReferenceExecutable = "sqldeveloper.exe" ?>
+	<?define ReferenceExecutableFolder = "sqldeveloper" ?>
+	<?define OracleVersion = !(bind.FileVersion.ReferenceExe) ?>
+</Include>

@@ -1,7 +1,5 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-	<!-- the executable file we're using to set the Installed Apps icon -->
-	<?define ReferenceExecutable = "sqldeveloper.exe" ?>
-	<?define ReferenceExecutableFolder = "sqldeveloper" ?>
+	<?include "Include.wxi"?>
 
 	<Package Name="$(ProductName)" Language="1033" Version="$(ProductVersion)" Manufacturer="$(Manufacturer)" UpgradeCode="0be19bf5-e570-4039-83d8-8e76ec56b72e" Scope="perMachine" >
 		<SummaryInformation Description="Oracle SQL Developer $(ProductVersion)" />
@@ -21,6 +19,7 @@
 			<ComponentGroupRef Id="EnvironmentChanges" />
 			<ComponentGroupRef Id="SqlDeveloperComponents" />
 			<ComponentGroupRef Id="RegistryChanges" />
+			<ComponentGroupRef Id="JRERegistryChanges" />
 			<ComponentRef Id="ProgramMenuDir" />
 			<Feature Id="PublicDesktopShortcut" Title="Add desktop shortut" Level="1" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
 				<ComponentRef Id="DesktopShortcut" />
@@ -67,12 +66,25 @@
 			<Component Id="ReferenceExectable" Guid="{DFD20123-DE91-40AD-BDC2-1F2B77BCC3D7}" Condition="1 = 0" Bitness="always64">
 				<File Id="ReferenceExe" KeyPath="yes" Source="$(var.SolutionDir)\$(var.ReferenceExecutableFolder)\$(var.ReferenceExecutable)" />
 			</Component>
+			<!-- this will never be installed (Condition is never true) - it's just here so we can get the java.exe file version -->
+			<Component Id="JREReferenceExecutable" Guid="{D1F3EB20-431E-4E51-9A55-21C6C5383BB5}" Condition="1 = 0" Bitness="always64">
+				<File Id="JREReferenceExecutable" KeyPath="yes" Source="$(SolutionDir)$(var.ReferenceExecutableFolder)\$(JREReferenceExecutableFolder)\$(JREReferenceExecutable)" />
+			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="RegistryChanges" Directory="TARGETDIR">
 			<Component Id="RootProductRegistryKey" Guid="{30D5672A-F8B1-4116-8652-F82606C3AEE8}">
 				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" ForceDeleteOnUninstall="yes">
 					<RegistryValue Name="InstallDir" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
-					<RegistryValue Name="Version" Type="string" Value="$(var.ProductVersion)" />
+					<RegistryValue Name="Version" Type="string" Value="$(ProductVersion)" />
+					<!-- Version of sqldeveloper.exe - may not match ${ProductVersion) because the product version may have been increased to indicate a new bundled JRE is included -->
+					<RegistryValue Name="OracleVersion" Type="string" Value="$(OracleVersion)" />
+				</RegistryKey>
+			</Component>
+		</ComponentGroup>
+		<ComponentGroup Id="JRERegistryChanges" Directory="INSTALLFOLDER">
+			<Component Id="JRERegistryKey" Guid="{61ED3F52-3F71-4B7B-B648-4053342E4EB4}">
+				<RegistryKey Root="HKMU" Key="Software\[Manufacturer]\[ProductName]\JRE" ForceDeleteOnUninstall="yes">
+					<RegistryValue Name="Version" Type="string" Value="$(JREVersion)" />
 				</RegistryKey>
 			</Component>
 		</ComponentGroup>

@@ -1,62 +1,63 @@
 ﻿<Project>
-	<PropertyGroup>
-		<InstallerName>$(MSBuildProjectName)</InstallerName>
-	</PropertyGroup>
-	<Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="6.0.2" />
-	<PropertyGroup>
-		<Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-	</PropertyGroup>
-	<PropertyGroup>
-		<InstallerPlatform>x64</InstallerPlatform>
-		<DefineConstants>ProductVersion=$(ProductVersion);Manufacturer=$(Company);ProductName=$(ProductName);SqlDeveloperHarvestFolder=$(SolutionDir)sqldeveloper;</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-		<!-- <DefineConstants>Debug</DefineConstants> -->
-		<SuppressSpecificWarnings>
-		</SuppressSpecificWarnings>
-		<SuppressIces>ICE57</SuppressIces>
-		<OutputName>$(ProductName)_$(ProductVersion)_$(Configuration)_$(Platform)</OutputName>
-		<OutputPath>bin\$(Configuration)\</OutputPath>
-	</PropertyGroup>
-	<PropertyGroup>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-		<!-- 
+  <PropertyGroup>
+    <InstallerName>$(MSBuildProjectName)</InstallerName>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="6.0.2" />
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+  </PropertyGroup>
+  <PropertyGroup>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <DefineConstants>ProductVersion=$(ProductVersion);Manufacturer=$(Company);ProductName=$(ProductName);SqlDeveloperHarvestFolder=$(SolutionDir)sqldeveloper;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <!-- <DefineConstants>Debug</DefineConstants> -->
+    <SuppressSpecificWarnings>
+    </SuppressSpecificWarnings>
+    <SuppressIces>ICE57</SuppressIces>
+    <OutputName>$(ProductName)_$(ProductVersion)_$(Configuration)_$(Platform)</OutputName>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <!-- 
       ICE61 suppressed because same version upgrades will be allowed. The version number is tied to sqldeveloper.exe, and allowing same version upgrades allows an MSI with fixes to upgrade an older one with the same version. 
       ICE57 - See comments in Product.wxs file for notes.
 		<SuppressIces>ICE57;ICE61</SuppressIces>
     -->
-	  <SuppressIces>ICE57</SuppressIces>
-		<OutputName>$(ProductName)_$(ProductVersion)_$(Platform)</OutputName>
-		<OutputPath>bin\$(Configuration)\</OutputPath>
-	</PropertyGroup>
-	<ItemGroup>
-		<Content Include="SqlDeveloper.xslt" />
-	</ItemGroup>
-	<ItemGroup>
-		<HarvestDirectory Include="$(SolutionDir)sqldeveloper">
-			<ComponentGroupName>SqlDeveloperComponents</ComponentGroupName>
-			<DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
-			<KeepEmptyDirectories>true</KeepEmptyDirectories>
-			<PreprocessorVariable>var.SqlDeveloperHarvestFolder</PreprocessorVariable>
-			<SuppressCom>true</SuppressCom>
-			<SuppressRegistry>true</SuppressRegistry>
-			<SuppressRootDirectory>true</SuppressRootDirectory>
-			<Transforms>SqlDeveloper.xslt</Transforms>
-			<HarvestDirectoryVerboseOutput>true</HarvestDirectoryVerboseOutput>
-		</HarvestDirectory>
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
-		<PackageReference Include="WixToolset.Heat" Version="6.0.2" />
-	</ItemGroup>
-	<Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="6.0.2" />
-	<PropertyGroup>
-		<PostBuildEvent>
-		</PostBuildEvent>
-		<PreBuildEvent>
-		</PreBuildEvent>
-		<OutputType>Package</OutputType>
-		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	</PropertyGroup>
+    <SuppressIces>ICE57</SuppressIces>
+    <OutputName>$(ProductName)_$(ProductVersion)_$(Platform)</OutputName>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Include.wxi" />
+    <Content Include="SqlDeveloper.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <HarvestDirectory Include="$(SolutionDir)sqldeveloper">
+      <ComponentGroupName>SqlDeveloperComponents</ComponentGroupName>
+      <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+      <KeepEmptyDirectories>true</KeepEmptyDirectories>
+      <PreprocessorVariable>var.SqlDeveloperHarvestFolder</PreprocessorVariable>
+      <SuppressCom>true</SuppressCom>
+      <SuppressRegistry>true</SuppressRegistry>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      <Transforms>SqlDeveloper.xslt</Transforms>
+      <HarvestDirectoryVerboseOutput>true</HarvestDirectoryVerboseOutput>
+    </HarvestDirectory>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
+    <PackageReference Include="WixToolset.Heat" Version="6.0.2" />
+  </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="6.0.2" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <OutputType>Package</OutputType>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
 </Project>
