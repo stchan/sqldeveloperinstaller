@@ -1,7 +1,4 @@
 ﻿<Project>
-  <PropertyGroup>
-    <InstallerName>$(MSBuildProjectName)</InstallerName>
-  </PropertyGroup>
   <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="6.0.2" />
   <PropertyGroup>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
@@ -15,7 +12,7 @@
     <SuppressSpecificWarnings>
     </SuppressSpecificWarnings>
     <SuppressIces>ICE57</SuppressIces>
-    <OutputName>$(ProductName)_$(ProductVersion)_$(Configuration)_$(Platform)</OutputName>
+    <OutputName>$(ProductShortName)_$(ProductVersion)_$(Configuration)_$(Platform)</OutputName>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
@@ -27,7 +24,7 @@
 		<SuppressIces>ICE57;ICE61</SuppressIces>
     -->
     <SuppressIces>ICE57</SuppressIces>
-    <OutputName>$(ProductName)_$(ProductVersion)_$(Platform)</OutputName>
+    <OutputName>$(ProductShortName)_$(ProductVersion)_$(Platform)</OutputName>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
